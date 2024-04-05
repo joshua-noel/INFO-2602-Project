@@ -5,6 +5,7 @@ from flask.cli import with_appcontext, AppGroup
 from App.database import db, get_migrate
 from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users )
+from App.models.workout import Workout
 
 # This commands file allow you to create convenient CLI commands for testing controllers
 
@@ -17,6 +18,16 @@ def initialize():
     db.drop_all()
     db.create_all()
     create_user('bob', 'bobpass')
+    
+    with open('workouts.csv', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            workout = Workout(name=row['name'],
+                              set_count=row['sets'],
+                              rep_count=row['reps'])
+            db.session.add(workout)
+        db.session.commit()
+    
     print('database intialized')
 
 '''
