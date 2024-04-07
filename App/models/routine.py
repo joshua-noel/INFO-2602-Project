@@ -7,6 +7,7 @@ class Routine(db.Model): #A group of one or more exercises
     name = db.Column(db.String(120), nullable=False)
     duration =  db.Column(db.Integer)
     workout = db.relationship('Workout', backref='routine')
+    user = db.relationship('User', backref='routine')
 
     def __init__(self, workout_id, name, duration):
         self.workout_id = workout_id
