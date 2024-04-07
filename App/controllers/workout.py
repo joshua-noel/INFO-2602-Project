@@ -1,4 +1,4 @@
-from App.models import Workout
+from App.models import workout
 from App.database import db
 
 def get_all_workouts():
