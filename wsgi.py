@@ -7,6 +7,7 @@ from App.main import create_app
 from App.controllers import ( create_user, get_all_users_json, get_all_users )
 from App.models.workout import Workout
 
+import csv
 # This commands file allow you to create convenient CLI commands for testing controllers
 
 app = create_app()
@@ -20,14 +21,14 @@ def initialize():
     create_user('bob', 'bobpass')
     
     with open('workouts.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile)
+        reader = csv.DictReader(csvfile)
         for row in reader:
-            workout = Workout(name=row['name'],
-                              set_count=row['sets'],
-                              rep_count=row['reps'])
+            workout = Workout(name=row['Names'],
+                              set_count=row['Sets'],
+                              rep_count=row['Reps'])
             db.session.add(workout)
         db.session.commit()
-    
+        
     print('database intialized')
 
 '''

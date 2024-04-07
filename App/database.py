@@ -9,5 +9,5 @@ def get_migrate(app):
 def create_db():
     db.create_all()
     
-def init_db(app):
+def init_db(app): 
     db.init_app(app)

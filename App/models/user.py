@@ -5,7 +5,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username =  db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
-    #routines = db.relationship('Routine', backref='user') ... this doesn't work, not sure if it's needed
 
     def __init__(self, username, password):
         self.username = username
