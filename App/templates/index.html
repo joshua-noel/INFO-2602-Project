@@ -1,13 +1,39 @@
 {% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}Flask MVC App{% endblock %}
+{% block title %}Workout App{% endblock %}
+{% block page %}Workout App{% endblock %}
 
 {{ super() }}
 
 {% block content %}
-    <h1>Flask MVC</h1>
+    
     {% if is_authenticated %}
-        <p> Welcome {{current_user.username}} </p>
-    {% endif %}
-    <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p>
+    <section class="col s12 m9" style="height: 84vh; overflow-y:scroll;">
+        <div class="row" style="width: 100%; background-color: blue;">
+            <h1> Welcome {{current_user.username}} </h1>
+            <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p> 
+        </div>
+    </section>
+    <section class="col s12 m3">
+        <h1 class="brand-logo" style="font-size: 2em; text-align: center;">
+            Routine
+          </h1> 
+        <ul class="collection" style="overflow-y: scroll; height:70vh;">
+
+             <li class="collection-item" style="height: 200px">
+                <p>Sets: </p>
+                <p>Reps: </p>
+                <form class="col" method="POST" action="#">
+                  <div class="input-field inline">
+                    <input type="number" name="quantity" value="#">
+                    <label for="quantity">Quantity</label>
+                  </div>
+                    <input type="submit" class="btn" value="Update">
+                </form>
+             </li>
+              
+        </ul>
+      </section>
+      {% else %}
+        <h1>Flask MVC</h1>
+      {% endif %}
 {% endblock %}
