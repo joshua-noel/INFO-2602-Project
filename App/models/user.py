@@ -10,26 +10,6 @@ class User(db.Model):
         self.username = username
         self.set_password(password)
 
-    def get_json(self):
-        return{
-            'id': self.id,
-            'username': self.username
-        }
-
-    def create_routine(self, name, duration):
-        exercise = Workout.query.get(workout_id)
-        if exercise:
-            try:
-                workout = Routine(self.id, workout_id, name, duration)
-                db.session.add(workout)
-                db.session.commit()
-                return workout
-            except Exception as e:
-                print(e)
-                db.session.rollback()
-                return None
-        return None
-
     def set_password(self, password):
         """Create hashed password."""
         self.password = generate_password_hash(password)
