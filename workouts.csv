@@ -1,23 +1,23 @@
-Name,Sets,Reps
-Push-ups,3,10
-Squats,4,12
-Plank,2,60
-Deadlifts,3,8
-Lunges,3,10
-Bench Press,4,8
-Pull-ups,3,10
-Leg Press,4,12
-Russian Twists,3,15
-Barbell Rows,4,8
-Shoulder Press,3,10
-Calf Raises,3,15
-Dumbbell Flyes,3,10
-Hammer Curls,3,12
-Tricep Dips,3,12
-Leg Curls,3,12
-Romanian Deadlifts,3,10
-Bicep Curls,3,12
-Incline Bench Press,4,10
-Lat Pulldowns,3,12
-Machine Shoulder Press,3,12
-Seated Cable Rows,3,12
+Name,Sets,Reps,Duration,Image
+Push-ups,3,10,300,https://img.freepik.com/free-photo/young-powerful-sportsman-training-push-ups-dark-wall_176420-537.jpg?size=626&ext=jpg&ga=GA1.1.1887574231.1711756800&semt=ais
+Squats,4,12,600,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvPLE40NIAB_J9Ngd_1hw3jsxU8Rcx7gqbIob7v5H0_A&s
+Plank,2,60,180,https://images.squarespace-cdn.com/content/v1/6089898666ebf34c5fd4e06f/1623863560438-K8R6WB378X58O7J1P4H4/goodplank.jpg
+Deadlifts,3,8,480,https://t3.ftcdn.net/jpg/04/85/64/08/360_F_485640894_Ek9L59TH3BBBCNhFDjNNEMibaxOzK3Cj.jpg
+Lunges,3,10,420,https://t4.ftcdn.net/jpg/04/82/73/51/360_F_482735165_TQGaEf3uZCtRqzxUVaoKy9dXDbGR4ipG.jpg
+Bench Press,4,8,720,https://www.shutterstock.com/image-photo/man-during-bench-press-exercise-600nw-336330497.jpg
+Pull-ups,3,10,360,https://steelsupplements.com/cdn/shop/articles/shutterstock_612717155_1000x.jpg?v=1639314260
+Leg Press,4,12,600,https://t4.ftcdn.net/jpg/00/92/88/27/360_F_92882796_5pJWmkS1as11AgdDINJwONYBA55a3Pfz.jpg
+Russian Twists,3,15,300,https://www.gymreapers.com/cdn/shop/articles/Kettlebell_Russian_Twist.jpg?v=1690844328&width=2048
+Barbell Rows,4,8,480,https://qph.cf2.quoracdn.net/main-qimg-e11e8e21070131f9ed0f5a24315f3219-lq
+Shoulder Press,3,10,420,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNrxOjuPSuWcKzHCBaCecyRecZ_SDwM5b7Ww&s
+Calf Raises,3,15,300,https://hips.hearstapps.com/hmg-prod/images/trained-mans-legs-with-muscular-calves-in-sneakers-royalty-free-image-1698250485.jpg?crop=0.561xw:1.00xh;0.197xw,0&resize=1200:*
+Dumbbell Flyes,3,10,360,https://dev.t-nation.com/wp-content/uploads/2018/07/Better-Than-Dumbbell-Flyes.jpg
+Hammer Curls,3,12,360,https://www.trainheroic.com/wp-content/uploads/2023/02/AdobeStock_417412809-TH-jpg.webp
+Tricep Dips,3,12,360,https://musclemagfitness.com/wp-content/uploads/tricep-dips-e1557229983455.jpg
+Leg Curls,3,12,300,https://cdn.mos.cms.futurecdn.net/ms8egWpjz9yjHM9ehnxYQk.jpg
+Romanian Deadlifts,3,10,480,https://generationiron.com/wp-content/uploads/2021/10/romanian-deadlift-cover-1024x543.jpg
+Bicep Curls,3,12,360,https://steelsupplements.com/cdn/shop/articles/shutterstock_657941434_376ae0c9-1a39-42d3-bc39-3eaf18d5038f_600x.jpg?v=1641548776
+Incline Bench Press,4,10,720,https://www.trainheroic.com/wp-content/uploads/2023/07/23076-TH-Blog-2400px-jpg.webp
+Lat Pulldowns,3,12,420,https://www.trainheroic.com/wp-content/uploads/2023/03/AdobeStock_423445223-TH-jpg.webp
+Machine Shoulder Press,3,12,480,https://www.primalstrength.com/cdn/shop/products/1000_x_1000_1-1-1.jpg?v=1646474429&width=1946
+Seated Cable Rows,3,12,480,https://steelsupplements.com/cdn/shop/articles/shutterstock_1009030792_2097x.jpg?v=1599316796
