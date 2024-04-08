@@ -7,32 +7,52 @@
 {% block content %}
     
     {% if is_authenticated %}
+    <!-- Remove {% raw %} and {% endraw %} for jinja functionality -->
+    {% raw %}
     <section class="col s12 m9" style="height: 84vh; overflow-y:scroll;">
-        <div class="row" style="width: 100%; background-color: blue;">
-            <h1> Welcome {{current_user.username}} </h1>
-            <p>This is a boileplate flask application which follows the MVC pattern for structuring the project.</p> 
+        <div class="row" style="width: 100%;">
+          <div class="row">
+            <div class="col s12 m4">
+              <div class="card">
+                <div class="card-image">
+                  <img src="https://hips.hearstapps.com/hmg-prod/images/back-view-of-muscular-sportsman-doing-pull-ups-on-royalty-free-image-1686216944.jpg?crop=0.670xw:1.00xh;0.296xw,0&resize=1200:*">
+                  <span class="card-title">{{workout.name}}</span>
+                </div>
+                <div class="card-content">
+                  <p>Sets: {{workout.set_count}}</p>
+                  <p>Reps: {{workout.reps_count}}</p>
+                  <p>Duration: {{workout.duration}}</p>
+                </div>
+                <div class="card-action">
+                  <a href="#" class="btn">Add</a>
+                </div>
+              </div>
+            </div>
         </div>
     </section>
     <section class="col s12 m3">
-        <h1 class="brand-logo" style="font-size: 2em; text-align: center;">
-            Routine
-          </h1> 
-        <ul class="collection" style="overflow-y: scroll; height:70vh;">
+      <div>
+        <h1 class="brand-logo" style="font-size: 1.75em; text-align: center;">
+          {{selected_routine.name}}
+        </h1> 
+        <ul class="collection" style="overflow-y: scroll; height:40vh;">
 
-             <li class="collection-item" style="height: 200px">
-                <p>Sets: </p>
-                <p>Reps: </p>
-                <form class="col" method="POST" action="#">
-                  <div class="input-field inline">
-                    <input type="number" name="quantity" value="#">
-                    <label for="quantity">Quantity</label>
-                  </div>
-                    <input type="submit" class="btn" value="Update">
-                </form>
-             </li>
+            <li class="collection-item" style="height: 200px">
+                <h3 style="font-size: large;">{{workout.name}}</h3>
+                <p>Sets: {{workout.sets_count}} <div class=btn>Update</div></p>
+                <p>Reps: {{workout.reps_count}} <div class=btn>Update</div></p>
+            </li>
               
         </ul>
+        </div>
+        <div style="overflow-y: scroll;" class="col s12">
+          <a href="#" style="font-size: large;"></a>{{routine.name}}</a>
+          <a href="#" style="font-size: large;"></a>{{routine.name}}</a>
+          <a href="#" style="font-size: large;"></a>{{routine.name}}</a>
+          <a href="#" style="font-size: large;"></a>{{routine.name}}</a>
+        </div>
       </section>
+      {% endraw %}
       {% else %}
         <h1>Flask MVC</h1>
       {% endif %}
