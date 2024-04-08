@@ -1,15 +1,13 @@
 from App.database import db
 
-class Routine(db.Model): #A group of one or more exercises
+class Routine(db.Model): # Stores all created routines, which are groups of one or more exercises (workouts)
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
     name = db.Column(db.String(120), nullable=False)
     duration =  db.Column(db.Integer)
-    workout = db.relationship('Workout', backref='routine')
+    workouts = db.relationship('RoutineWorkout', backref='routine')
     user = db.relationship('User', backref='routine')
 
-    def __init__(self, workout_id, name, duration):
-        self.workout_id = workout_id
+    def __init__(self, name, duration):
         self.name = name
         self.duration = duration

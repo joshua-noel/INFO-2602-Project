@@ -1,23 +1,16 @@
 from App.database import db
 
-# Looking at the requirements it would be simplest if workouts are pre-defined and users can just choose from them to add to routines
-# Nothing suggests that users need to be able to make/add their own workout, only browse them and add to routines
-
-class Workout(db.Model):
+class Workout(db.Model): # Stores preset exercises/workouts for user to choose from
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
+    duration = db.Column(db.Integer)
     set_count = db.Column(db.Integer)
     rep_count = db.Column(db.Integer)
+    image = db.Column(db.String(256))
 
-    def __init__(self, name, set_count, rep_count):
+    def __init__(self, name, duration, set_count, rep_count, image):
         self.name = name
+        self.duration = duration
         self.set_count = set_count
         self.rep_count = rep_count
-
-    def get_json(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "set_count": self.set_count,
-            "rep_count": self.rep_count
-        }
+        self.image = image
