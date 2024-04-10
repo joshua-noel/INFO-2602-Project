@@ -30,4 +30,17 @@ def update_routine(name, duration):
 
     return None
 
+def add_workout(self, workout_id, name, duration):
+    try:
+        workout = RoutineWorkout(workout_id, name, duration)
+        db.session.add(workout)
+        db.session.commit()
+        return workout
+
+    except Exception as e:
+        print(e)
+        db.session.rollback()
+        return None
+
+    return None
 
