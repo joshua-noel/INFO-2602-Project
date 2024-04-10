@@ -7,6 +7,8 @@ class Workout(db.Model): # Stores preset exercises/workouts for user to choose f
     set_count = db.Column(db.Integer)
     rep_count = db.Column(db.Integer)
     image = db.Column(db.String(256))
+    # allows us to reference a Workout object and its fields from RoutineWorkout table. Ex. 'RoutineWorkout.workout.duration'
+    in_routines = db.relationship('RoutineWorkout', backref='workout')
 
     def __init__(self, name, duration, set_count, rep_count, image):
         self.name = name

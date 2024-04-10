@@ -5,9 +5,11 @@ class Routine(db.Model): # Stores all created routines, which are groups of one 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     name = db.Column(db.String(120), nullable=False)
     duration =  db.Column(db.Integer)
-    workouts = db.relationship('RoutineWorkout', backref='routine')
+    # allows us to reference a Routine object and its fields from RoutineWorkouts table. Ex. 'RoutineWorkout.routine.user_id'
+    workouts_in_routine = db.relationship('RoutineWorkout', backref='routine')
 
     def __init__(self, name, duration):
+        self.user_id = user_id
         self.name = name
         self.duration = duration
 
@@ -16,5 +18,5 @@ class Routine(db.Model): # Stores all created routines, which are groups of one 
             "id": self.id,
             "user_id": self.user_id,
             "name": self.name,
-            "duraiton": self.duration
+            "duraton": self.duration
         }
