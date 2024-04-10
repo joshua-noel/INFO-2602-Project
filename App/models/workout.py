@@ -14,3 +14,13 @@ class Workout(db.Model): # Stores preset exercises/workouts for user to choose f
         self.set_count = set_count
         self.rep_count = rep_count
         self.image = image
+
+    def get_json(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "duration": self.duration,
+            "set_count": self.set_count,
+            "rep_count": self.rep_count,
+            "image": self.image
+        }

@@ -11,3 +11,11 @@ class Routine(db.Model): # Stores all created routines, which are groups of one 
     def __init__(self, name, duration):
         self.name = name
         self.duration = duration
+
+    def get_json(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "duraiton": self.duration
+        }
