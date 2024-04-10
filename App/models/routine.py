@@ -8,7 +8,6 @@ class Routine(db.Model): # Stores all created routines, which are groups of one 
     workouts = db.relationship('RoutineWorkout', backref='routine')
 
     def __init__(self, name, duration):
-    def __init__(self, name, duration):
         self.name = name
         self.duration = duration
 
