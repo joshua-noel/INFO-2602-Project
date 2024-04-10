@@ -7,6 +7,9 @@ def get_all_routines():
 def get_routine_by_name(name):
     return Routine.query.filter_by(name=name).first()
 
+def get_routine_by_id(id):
+    return Routine.query.filter_by(id=id).first()
+
 def get_all_routines_json():
     routines = get_all_routines()
 
@@ -20,8 +23,8 @@ def create_routine(name, duration):
     db.session.add(routine)
     return db.session.commit()
 
-def update_routine(name, duration):
-    routine = get_routine_by_name(name)
+def update_routine(id, duration):
+    routine = get_routine_by_id(id=id)
 
     if routine:
         routine.duration = duration
