@@ -27,8 +27,8 @@ def initialize():
             workout = Workout(name=row['Name'],
                               set_count=row['Sets'],
                               rep_count=row['Reps'], 
-                              duration = 2, 
-                              image = "picture")
+                              duration =row['Duration'], 
+                              image =row['Image'])
             db.session.add(workout)
         db.session.commit()
         
