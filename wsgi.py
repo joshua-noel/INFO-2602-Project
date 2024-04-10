@@ -26,7 +26,9 @@ def initialize():
         for row in reader:
             workout = Workout(name=row['Name'],
                               set_count=row['Sets'],
-                              rep_count=row['Reps'])
+                              rep_count=row['Reps'], 
+                              duration = 2, 
+                              image = "picture")
             db.session.add(workout)
         db.session.commit()
         
