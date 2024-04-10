@@ -17,7 +17,7 @@ def get_all_routines_json():
 
 def create_routine(name, duration):
     routine = Routine(name=name, duration=duration)
-    db.session.add(workout)
+    db.session.add(routine)
     return db.session.commit()
 
 def update_routine(name, duration):
@@ -25,7 +25,9 @@ def update_routine(name, duration):
 
     if routine:
         routine.duration = duration
-        db.session.add(workout)
+        db.session.add(routine)
         return db.session.commit()
 
     return None
+
+
