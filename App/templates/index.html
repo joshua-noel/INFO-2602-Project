@@ -42,30 +42,25 @@
       <section class="col s12 m4">
         <h4>Selected Routine:</h4>
         <div>
-          <p>{{routine.name}}</p>
-        </div>
-        
-        <div class="row">
-          <form class="col s12" method="POST" action="/renameRoutine/{{routine.id}}">
-            <div class="row">
-              <div class="col s12">
-                <h4>Rename Routine:</h4>
-                <div class="input-field inline">
-                  <input id="rename_{{routine.name}}" type="text" name="routine_rename">
-                  <label for="rename_inline">Rename</label>
-                  <input class = "btn purple left" type="submit" value="RENAME" id="renameBtn"/>
+          <h6>{{routine.name}}</h6>
+          <div class="row">
+            <form class="col s12" method="POST" action="/renameRoutine/{{routine.id}}">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field inline">
+                    <input id="rename_{{routine.name}}" type="text" name="routine_rename">
+                    <label for="rename_inline">Rename</label>
+                    <input class = "btn purple left" type="submit" value="RENAME" id="renameBtn"/>
+                  </div>
+                  <h6>Duration:{% raw %} {{totalDuration}} {% endraw %}</h6>
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="row">
-          
+            </form>
+          </div>
         </div>
       </section>
 
-    <section class="col s12 m5" style="height: 80vh;">
+    <section class="col s12 m5" style="height: 80vh; overflow-y: scroll;">
       <div class="row" style="width: 100%;">
         {% for workout in allworkouts %}
         <div class="col s12 m4">
