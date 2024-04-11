@@ -29,7 +29,7 @@ def update_routine(id, name, duration):
 
     return None
 
-def update_routine(id, name):
+def rename_routine(id, name):
     routine = get_routine_by_id(id=id)
 
     if routine:
