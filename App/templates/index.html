@@ -1,42 +1,82 @@
 {% extends "layout.html" %}
-{% block title %}Workout App{% endblock %}
-{% block page %}Workout App{% endblock %}
+{% block title %}Simple Fitness{% endblock %}
+{% block page %}Simple Fitness{% endblock %}
 
 {{ super() }}
 
 {% block content %}
     
     {% if is_authenticated %}
-
-    <div class="row">
-
-      <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
-        <h4>Your Routines:</h4>
-        <div class="collection">
-          {% for routine in allroutines %}
-            {% if routine.id == 1 %}
-              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
-            {% else %}
-              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
-            {% endif %}  
-          {% endfor %}
+      <section class="col s12 m3" style="margin-top: 5px;">
+        <div class="routine-select">
+          <h4>Your Routines:</h4>
+          <div class="collection" style="overflow-y: scroll; height: 30vh;">
+            {% for routine in allroutines %}
+              {% if routine.id == 1 %}
+                <a href=""/{{routine.id}}"" class="collection-item active purple">{{routine.name}}</a>
+              {% else %}
+                <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+              {% endif %}  
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row">
+          <form class="col s12" method="POST" action="/createRoutine">
+            <h4>Create New Routine:</h4>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field inline">
+                  <input id="routine_name" type="text" name="routine_name">
+                  <label for="name_inline">Name</label>
+                  <input class = "btn purple left" type="submit" value="SUBMIT" id="createBtn"/>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </section>
 
       <section class="col s12 m4">
         <h4>Selected Routine:</h4>
         <div>
-          <p>{{routine.name}}</p>
+          <h6>{{routine.name}}</h6>
+          <div class="row">
+            <form class="col s12" method="POST" action="/renameRoutine/{{routine.id}}">
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field inline">
+                    <input id="rename_{{routine.name}}" type="text" name="routine_rename">
+                    <label for="rename_inline">Rename</label>
+                    <input class = "btn purple left" type="submit" value="RENAME" id="renameBtn"/>
+                  </div>
+                  <h6>Duration:{% raw %} {{totalDuration}} {% endraw %} minutes</h6>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col s12 list" style="padding: 10px; height:34vh;  overflow-y: scroll;" method="POST" action="deleteWorkout/{{routine.id}}">
+            {% raw %}
+            <!-- {% for workout in current_user.routine %} -->
+              <div class="list-item" style="height: 40px;">
+                {{workout.name}}
+                <a class="btn red right" type="submit" value="Delete" id="delete_{{workout.name}}" href="/deleteWorkout/{{workout.id}}">Delete</a>
+              </div>
+            <!-- {% endfor %} -->
+            {% endraw %}
+          </form>
         </div>
       </section>
-
-    <section class="col s12 m5" style="height: 80vh; overflow-y:scroll;">
-      <div class="row" style="width: 100%;">
+        
+    <section class="col s12 m5">
+      <h4>Browse Workouts:</h4>
+      <div class="row" style="width: 100%; height: 70vh; overflow-y: scroll;">
         {% for workout in allworkouts %}
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="https://hips.hearstapps.com/hmg-prod/images/back-view-of-muscular-sportsman-doing-pull-ups-on-royalty-free-image-1686216944.jpg?crop=0.670xw:1.00xh;0.296xw,0&resize=1200:*">
+              <img src="{{workout.image}}" style="height: 150px;">
               <span class="card-title">{{workout.name}}</span>
             </div>
             <div class="card-content">
@@ -49,50 +89,8 @@
             </div>
           </div>
         </div>
-        
       {% endfor %}
-      </div>
-
     </section>
-
-    {% raw %}
-    <section class="col s12 m3">
-      <div class="row">
-        <h1 class="brand-logo" style="font-size: 1.75em; text-align: center;">
-          {{}}
-        </h1> 
-        <div style="overflow-y: scroll; height:35vh; padding: 10px;">
-          
-          <h3 style="font-size: large; ">{{workout.name}}</h3>
-            <form class="col" method="POST" action="updateSets/{{workout.id}}">
-              <div class="input-field inline">
-                <input type="number" name="sets" value="{{workout.sets_count}}">
-                  <label for="sets">Sets</label>
-              </div>
-              <input type="submit" class="btn" value="Update">
-            </form>
-            <form class="col" method="POST" action="updateReps/{{workout.id}}">
-              <div class="input-field inline">
-                <input type="number" name="reps" value="{{workout.reps_count}}">
-                  <label for="reps">Reps</label>
-              </div>
-              <input type="submit" class="btn" value="Update">
-            </form>
-
-            <h1 class="brand-logo" style="font-size: 1.5em; margin-top: 30px;">
-              Total Duration: {{total}}
-            </h1> 
-          </div>
-        </div>
-        <div class="row" style="height: 25vh; overflow-y: scroll;">
-          <div  class="col s12">
-            <a href="#" style="font-size: large; text-align: center;">{{routine.name}}</a>
-          </div>
-
-        </div>
-      </section>
-      {% endraw %}
-      
       {% else %}
         <h1>Flask MVC</h1>
       {% endif %}
