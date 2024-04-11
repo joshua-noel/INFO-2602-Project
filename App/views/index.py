@@ -40,13 +40,13 @@ def index_page(id=1):
     if default_routine:
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
-        routine = get_routine_by_id(id=default_routine.id)
+        routine = get_routine_by_id(id=id)
         return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = jwt_current_user)
     else:
-        create_default_routine(jwt_current_user)
+        default_routine = create_default_routine(jwt_current_user)
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
-        routine = get_routine_by_id(id=id)
+        routine = get_routine_by_id(id=default_routine.id)
         return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = jwt_current_user)
 
 @index_views.route('/init', methods=['GET'])
