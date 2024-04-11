@@ -15,16 +15,14 @@ def get_all_workouts_json():
 
     return [workout.get_json() for workout in workouts]
 
-def update_workout(name, set_count, rep_count):
-    workout = get_workout_by_name(name)
+# def update_workout(name, set_count, rep_count):
+#     workout = get_workout_by_name(name)
 
-    if workout:
-        workout.name = name
-        workout.set_count = set_count
-        workout.rep_count = rep_count
-        db.session.add(workout)
-        return db.session.commit()
+#     if workout:
+#         workout.name = name
+#         workout.set_count = set_count
+#         workout.rep_count = rep_count
+#         db.session.add(workout)
+#         return db.session.commit()
 
-    return None
-    
-    
+#     return None

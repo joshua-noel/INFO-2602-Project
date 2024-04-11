@@ -30,4 +30,29 @@ def update_user(id, username):
         db.session.add(user)
         return db.session.commit()
     return None
+
+# Create routine functions 
+# To be used by action routes in index.py view
+
+def create_default_routine(self):
+    routine = Routine(user_id = self.id, name = 'My Starter Routine', duration = none)
+    db.session.add(routine)
+    db.session.commit()
+    return routine
+
+def check_routine(self, name):
+    valid = True
+    check = Routine.query.filter_by(name = name, user_id = self.id).first()
+    if check:
+            valid = False
+            return valid
+    else:
+        return valid
+
+def create_routine(self, name):
+    routine = Routine(user_id = self.id, name = name, duration = none)
+    db.session.add(routine)
+    db.session.commit()
+    return routine
+
     
