@@ -13,9 +13,9 @@
           <div class="collection" style="overflow-y: scroll; height: 30vh;">
             {% for routine in allroutines %}
               {% if routine.id == 1 %}
-                <a href=""/{{routine.id}}"" class="collection-item active purple">{{routine.name}}</a>
+                <a href="/{{routine.id}}" class="collection-item active purple">{{routine.name}}</a>
               {% else %}
-                <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+                <a href="/{{routine.id}}" class="collection-item">{{routine.name}}</a>
               {% endif %}  
             {% endfor %}
           </div>
