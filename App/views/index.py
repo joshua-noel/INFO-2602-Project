@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, render_template, request, send_from_direc
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 
 from App.models import *
+from App.models import *
 from App.controllers import (
     create_user,
     jwt_required,
