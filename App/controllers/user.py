@@ -50,7 +50,7 @@ def check_routine(self, name):
         return valid
 
 def create_routine(self, name):
-    routine = Routine(user_id = self.id, name = name, duration = none)
+    routine = Routine(user_id = self.id, name = name, duration = None)
     db.session.add(routine)
     db.session.commit()
     return routine
