@@ -40,7 +40,7 @@ def index_page(id=1):
     if default_routine:
             allroutines = get_all_routines()
             allworkouts = get_all_workouts()
-            routine = Routine.query.filter_by(id=routine_id).first()
+            routine = Routine.query.filter_by(id=default_routine.id).first()
             return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = jwt_current_user)
     else:
         create_default_routine(jwt_current_user)

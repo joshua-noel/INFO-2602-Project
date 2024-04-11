@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
-{% block title %}Workout App{% endblock %}
-{% block page %}Workout App{% endblock %}
+{% block title %}Simple Fitness{% endblock %}
+{% block page %}Simple Fitness{% endblock %}
 
 {{ super() }}
 
@@ -33,11 +33,10 @@
     <section class="col s12 m5" style="height: 80vh; overflow-y:scroll;">
       <div class="row" style="width: 100%;">
         {% for workout in allworkouts %}
-        {% for workout in allworkouts %}
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="{{workout.image}}">
+              <img src="{{workout.image}}" style="height: 150px;">
               <span class="card-title">{{workout.name}}</span>
             </div>
             <div class="card-content">
@@ -60,7 +59,7 @@
     <section class="col s12 m3">
       <div class="row">
         <h1 class="brand-logo" style="font-size: 1.75em; text-align: center;">
-          {{}}
+          
         </h1> 
         <div style="overflow-y: scroll; height:35vh; padding: 10px;">
           
