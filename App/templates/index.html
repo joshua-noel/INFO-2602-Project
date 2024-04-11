@@ -7,11 +7,32 @@
 {% block content %}
     
     {% if is_authenticated %}
-    <!-- Remove {% raw %} and {% endraw %} for jinja functionality -->
-    {% raw %}
-    <section class="col s12 m9" style="height: 80vh; overflow-y:scroll;">
-      <div class="row" style="width: 100%;">
 
+    <div class="row">
+
+      <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
+        <h4>Your Routines:</h4>
+        <div class="collection">
+          {% for routine in allroutines %}
+            {% if routine.id == 1 %}
+              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+            {% else %}
+              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+            {% endif %}  
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="col s12 m4">
+        <h4>Selected Routine:</h4>
+        <div>
+          <p>{{routine.name}}</p>
+        </div>
+      </section>
+
+    <section class="col s12 m5" style="height: 80vh; overflow-y:scroll;">
+      <div class="row" style="width: 100%;">
+        {% for workout in allworkouts %}
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
@@ -29,13 +50,16 @@
           </div>
         </div>
         
-         
+      {% endfor %}
       </div>
+
     </section>
+
+    {% raw %}
     <section class="col s12 m3">
       <div class="row">
         <h1 class="brand-logo" style="font-size: 1.75em; text-align: center;">
-          {{selected_routine.name}}
+          {{}}
         </h1> 
         <div style="overflow-y: scroll; height:35vh; padding: 10px;">
           
@@ -68,6 +92,7 @@
         </div>
       </section>
       {% endraw %}
+      
       {% else %}
         <h1>Flask MVC</h1>
       {% endif %}
