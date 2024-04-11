@@ -10,16 +10,21 @@
 
     <div class="row">
 
-      <section class="col s12 m3" style="margin-top: 5px; overflow-y:scroll; height: 86vh">
-        <h4>Your Routines:</h4>
-        <div class="collection">
-          {% for routine in allroutines %}
-            {% if routine.id == 1 %}
-              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
-            {% else %}
-              <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
-            {% endif %}  
-          {% endfor %}
+      <section class="col s12 m3" style="margin-top: 5px;">
+        <div class="routine-select" >
+          <h4>Your Routines:</h4>
+          <div class="collection" style="overflow-y: scroll; height: 40vh;">
+            {% for routine in allroutines %}
+              {% if routine.id == 1 %}
+                <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+              {% else %}
+                <a href=""/{{routine.id}}"" class="collection-item">{{routine.name}}</a>
+              {% endif %}  
+            {% endfor %}
+          </div>
+        </div>
+        <div class="routine-create">
+          
         </div>
       </section>
 
