@@ -1,4 +1,4 @@
-from App.models import User
+from App.models import User, Routine
 from App.database import db
 
 def create_user(username, password):
@@ -35,7 +35,7 @@ def update_user(id, username):
 # To be used by action routes in index.py view
 
 def create_default_routine(self):
-    routine = Routine(user_id = self.id, name = 'My Starter Routine', duration = none)
+    routine = Routine(self.id,'My Starter Routine', None)
     db.session.add(routine)
     db.session.commit()
     return routine

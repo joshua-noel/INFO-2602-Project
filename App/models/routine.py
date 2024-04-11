@@ -8,7 +8,7 @@ class Routine(db.Model): # Stores all created routines, which are groups of one 
     # allows us to reference a Routine object and its fields from RoutineWorkouts table. Ex. 'RoutineWorkout.routine.user_id'
     workouts_in_routine = db.relationship('RoutineWorkout', backref='routine')
 
-    def __init__(self, name, duration):
+    def __init__(self, user_id, name, duration):
         self.user_id = user_id
         self.name = name
         self.duration = duration
