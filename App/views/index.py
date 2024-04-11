@@ -10,7 +10,8 @@ from App.controllers import (
     create_default_routine,
     get_all_workouts,
     get_all_routines,
-    get_routine_by_id
+    get_routine_by_id,
+    rename_routine
 )
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -36,18 +37,19 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 @index_views.route("/<id>", methods=['GET']) #"/<int:routine_id>"
 @jwt_required()
 def index_page(id=1):
-    default_routine = Routine.query.filter_by(name = 'My Starter Routine').first() #filter_by(id = 1).first()
+    default_routine = get_routine_by_id(id=1)
+
     if default_routine:
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
-        routine = get_routine_by_id(id=id)
-        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = jwt_current_user)
+        selected_routine = get_routine_by_id(id=id)
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, selected_routine = selected_routine, current_user = jwt_current_user)
     else:
         default_routine = create_default_routine(jwt_current_user)
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
-        routine = get_routine_by_id(id=default_routine.id)
-        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = jwt_current_user)
+        selected_routine = get_routine_by_id(id=default_routine.id)
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, selected_routine = selected_routine, current_user = jwt_current_user)
 
 @index_views.route('/init', methods=['GET'])
 def init():
@@ -66,12 +68,25 @@ def health_check():
 @jwt_required()
 def create_routine_action():
     data = request.form
-    print(data)
     valid = check_routine(jwt_current_user, name=data['routine_name'])
 
     if valid == True:
         create_routine(jwt_current_user, name=data['routine_name'])
         flash('Routine created!')
+        return redirect(url_for('index_views.index_page'))
+    else:
+        flash('A Routine of this name already exists!')
+        return redirect(url_for('index_views.index_page'))
+
+@index_views.route("/renameRoutine/<id>", methods=['POST'])
+@jwt_required()
+def rename_routine_action(id=id):
+    data = request.form
+    valid = check_routine(jwt_current_user, name=data['routine_rename'])
+
+    if valid == True:
+        rename_routine(id=id, name=data['routine_rename'])
+        flash('Routine renamed!')
         return redirect(url_for('index_views.index_page'))
     else:
         flash('A Routine of this name already exists!')
