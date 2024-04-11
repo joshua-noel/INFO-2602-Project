@@ -1,7 +1,6 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
+from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 
-from App.models import *
 from App.models import *
 from App.controllers import (
     create_user,
@@ -67,11 +66,13 @@ def health_check():
 @jwt_required()
 def create_routine_action():
     data = request.form
-    valid = jwt_current_user.check_routine(data['name'])
+    print(data)
+    valid = check_routine(jwt_current_user, name=data['routine_name'])
+
     if valid == True:
-        jwt_current_user.create_routine(data['name'])
+        create_routine(jwt_current_user, name=data['routine_name'])
         flash('Routine created!')
-        return redirect(url_for('index_page'))
+        return redirect(url_for('index_views.index_page'))
     else:
         flash('A Routine of this name already exists!')
-        return redirect(url_for('index_page'))
+        return redirect(url_for('index_views.index_page'))
