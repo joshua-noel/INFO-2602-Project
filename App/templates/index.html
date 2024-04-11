@@ -9,13 +9,23 @@
     {% if is_authenticated %}
     <!-- Remove {% raw %} and {% endraw %} for jinja functionality -->
     {% raw %}
+    <div class="col s12 m3 list-container collection" style="max-height: 88vh;">
+      {% for routine in allroutines %}
+        {% if routine.id == current_user.id %}
+          <a href="/app/{{routine.id}}" class="colleciton-item active" id="{{routine.id}}">{{routine.name}}</a>
+        {% else %}
+          <a href="/app/{{routine.id}}" class="colleciton-item" id="{{routine.id}}">{{routine.name}}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
     <section class="col s12 m9" style="height: 80vh; overflow-y:scroll;">
       <div class="row" style="width: 100%;">
-
+        {% for workout in allworkouts %}
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="https://hips.hearstapps.com/hmg-prod/images/back-view-of-muscular-sportsman-doing-pull-ups-on-royalty-free-image-1686216944.jpg?crop=0.670xw:1.00xh;0.296xw,0&resize=1200:*">
+              <img src="{{workout.image}}">
               <span class="card-title">{{workout.name}}</span>
             </div>
             <div class="card-content">
@@ -28,45 +38,9 @@
             </div>
           </div>
         </div>
-        
-         
+        {% endfor %}
       </div>
     </section>
-    <section class="col s12 m3">
-      <div class="row">
-        <h1 class="brand-logo" style="font-size: 1.75em; text-align: center;">
-          {{selected_routine.name}}
-        </h1> 
-        <div style="overflow-y: scroll; height:35vh; padding: 10px;">
-          
-          <h3 style="font-size: large; ">{{workout.name}}</h3>
-            <form class="col" method="POST" action="updateSets/{{workout.id}}">
-              <div class="input-field inline">
-                <input type="number" name="sets" value="{{workout.sets_count}}">
-                  <label for="sets">Sets</label>
-              </div>
-              <input type="submit" class="btn" value="Update">
-            </form>
-            <form class="col" method="POST" action="updateReps/{{workout.id}}">
-              <div class="input-field inline">
-                <input type="number" name="reps" value="{{workout.reps_count}}">
-                  <label for="reps">Reps</label>
-              </div>
-              <input type="submit" class="btn" value="Update">
-            </form>
-
-            <h1 class="brand-logo" style="font-size: 1.5em; margin-top: 30px;">
-              Total Duration: {{total}}
-            </h1> 
-          </div>
-        </div>
-        <div class="row" style="height: 25vh; overflow-y: scroll;">
-          <div  class="col s12">
-            <a href="#" style="font-size: large; text-align: center;">{{routine.name}}</a>
-          </div>
-
-        </div>
-      </section>
       {% endraw %}
       {% else %}
         <h1>Flask MVC</h1>

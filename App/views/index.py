@@ -38,13 +38,13 @@ def home_page(routine_id=1):
             allroutines = Routine.query.all()
             allworkouts = Workout.query.all()
             routine = Routine.query.filter_by(id=routine_id).first()
-            return render_template("home.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
+            return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
     else:
         create_default_routine(current_user)
         allroutines = Routine.query.all()
         allworkouts = Workout.query.all()
         routine = Routine.query.filter_by(id=routine_id).first()
-        return render_template("home.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
 
 # Action Routes
 @index_views.route("/pokemon/<int:routine_id>", methods=['POST'])
