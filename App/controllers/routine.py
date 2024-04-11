@@ -18,11 +18,6 @@ def get_all_routines_json():
 
     return [routine.get_json() for routine in routines]
 
-def create_routine(name, duration):
-    routine = Routine(name=name, duration=duration)
-    db.session.add(routine)
-    return db.session.commit()
-
 def update_routine(id, duration):
     routine = get_routine_by_id(id=id)
 
