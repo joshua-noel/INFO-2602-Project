@@ -1,13 +1,14 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 
-from App.models import db
+from App.models import *
 from App.controllers import (
     create_user,
     jwt_required,
     check_routine,
     create_routine,
-    create_default_routine
+    create_default_routine,
+    get_all_workouts
 )
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -36,15 +37,15 @@ def home_page(routine_id=1):
     default_routine = Routine.query.filter_by(name = 'My Starter Routine').first()
     if default_routine:
             allroutines = Routine.query.all()
-            allworkouts = Workout.query.all()
+            allworkouts = get_all_workouts()
             routine = Routine.query.filter_by(id=routine_id).first()
             return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
     else:
-        create_default_routine(current_user)
+        # create_default_routine(current_user)
         allroutines = Routine.query.all()
-        allworkouts = Workout.query.all()
+        allworkouts = get_all_workouts()
         routine = Routine.query.filter_by(id=routine_id).first()
-        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine, current_user = current_user)
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routine = routine)
 
 # Action Routes
 @index_views.route("/pokemon/<int:routine_id>", methods=['POST'])

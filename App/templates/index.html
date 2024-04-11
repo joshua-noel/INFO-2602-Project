@@ -8,7 +8,7 @@
     
     {% if is_authenticated %}
     <!-- Remove {% raw %} and {% endraw %} for jinja functionality -->
-    {% raw %}
+    
     <div class="col s12 m3 list-container collection" style="max-height: 88vh;">
       {% for routine in allroutines %}
         {% if routine.id == current_user.id %}
@@ -39,6 +39,7 @@
           </div>
         </div>
         {% endfor %}
+        {% raw %}
       </div>
     </section>
       {% endraw %}
