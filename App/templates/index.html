@@ -23,7 +23,19 @@
             {% endfor %}
           </div>
         </div>
-        <div class="routine-create">
+        <div class="row">
+          <form class="col s12" method="POST" action="/createRoutine">
+            <h4>Create New Routine:</h4>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field inline">
+                  <input id="routine_name" type="text" name="routine_name">
+                  <label for="name_inline">Name</label>
+                  <input class = "btn purple left" type="submit" value="SUBMIT" id="createBtn"/>
+                </div>
+              </div>
+            </div>
+          </form>
           
         </div>
       </section>
