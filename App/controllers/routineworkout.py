@@ -1,8 +1,8 @@
-from App.models import routineworkout
+from App.models import RoutineWorkout
 from App.database import db
 
-def get_all_routine_workouts():
-    return Routineworkout.query.all()
+def get_all_routineworkouts():
+    return RoutineWorkout.query.all()
 
 def get_all_routines_json():
     routine_workouts = get_all_routine_workouts()

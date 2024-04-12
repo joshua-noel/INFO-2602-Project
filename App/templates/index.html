@@ -56,16 +56,22 @@
           </div>
         </div>
         <div class="row">
-          <form class="col s12 list" style="padding: 10px; height:43vh;  overflow-y: scroll;" method="POST" action="deleteWorkout/{{selected_routine.id}}">
-            {% raw %}
-            <!-- {% for workout in current_user.routine %} -->
-              <div class="list-item" style="height: 40px;">
-                {{workout.name}}
-                <a class="btn red right" type="submit" value="Delete" id="delete_{{workout.name}}" href="/deleteWorkout/{{workout.id}}">Delete</a>
-              </div>
-            <!-- {% endfor %} -->
-            {% endraw %}
-          </form>
+          <div class="col s12 list" style="padding: 10px; height:43vh;  overflow-y: scroll;">
+            {% for routineworkout in routineworkouts %}
+              {% if routineworkout.user_id == current_user.id %}
+                {% if routineworkout.routine_id == selected_routine.id %}
+                  {% for workout in allworkouts %}
+                    {% if workout.id == routineworkout.workout_id %}
+                      <div class="list-item" style="height: 40px;">
+                      {{workout.name}}
+                      <a class="btn red right" type="submit" value="Delete" id="delete_{{workout.name}}" href="">Delete</a> <!--/deleteWorkout/{{workout.id}}-->
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
         </div>
       </section>
         
@@ -85,11 +91,12 @@
               <p>Duration: {{workout.duration}}</p>
             </div>
             <div class="card-action">
-              <a href="/addWorkout/{{workout.id}}" class="btn">Add</a>
+                <a href="/addWorkout/{{selected_routine.id}}/{{workout.id}}" class="btn">Add</a>
             </div>
           </div>
         </div>
       {% endfor %}
+      </div>
     </section>
       {% else %}
         <h1>Flask MVC</h1>

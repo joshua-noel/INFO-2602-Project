@@ -1,4 +1,4 @@
-from App.models import User, Routine
+from App.models import User, Routine, Workout, RoutineWorkout
 from App.database import db
 
 def create_user(username, password):
@@ -44,8 +44,8 @@ def check_routine(self, name):
     valid = True
     check = Routine.query.filter_by(name = name, user_id = self.id).first()
     if check:
-            valid = False
-            return valid
+        valid = False
+        return valid
     else:
         return valid
 
@@ -54,5 +54,20 @@ def create_routine(self, name):
     db.session.add(routine)
     db.session.commit()
     return routine
+    
+def check_workout (self, routine_id, workout_id):
+    check = RoutineWorkout.query.filter_by(user_id = self.id, workout_id = workout_id, routine_id = routine_id).first()
+    if check:
+        return False
+    else:
+        return True
+
+def add_workout_to_routine(self, routine_id, workout_id):
+    routine_workout = RoutineWorkout(self.id, workout_id = workout_id, routine_id = routine_id)
+    db.session.add(routine_workout)
+    db.session.commit()
+    return routine_workout
+
+
 
     
