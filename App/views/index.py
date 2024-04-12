@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory, jsonify, flash, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
+import csv
 
 from App.models import *
 from App.controllers import (
@@ -62,6 +63,18 @@ def init():
     db.drop_all()
     db.create_all()
     create_user('bob', 'bobpass')
+
+    with open('workouts.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            workout = Workout(name=row['Name'],
+                                set_count=row['Sets'],
+                                rep_count=row['Reps'], 
+                                duration =row['Duration'], 
+                                image =row['Image'])
+            db.session.add(workout)
+            db.session.commit()
+
     return jsonify(message='db initialized!')
 
 @index_views.route('/health', methods=['GET'])
@@ -106,7 +119,7 @@ def add_workout_to_routine_action(selected_routine_id, workout_id):
     if workout_in_routine:
         add_workout_to_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
         flash('Workout added!')
-        return redirect(url_for(f'index_views.index_page'))
+        return redirect(url_for('index_views.index_page'))
     else: 
         flash('Workout already exists in this routine!')
         return redirect(url_for('index_views.index_page'))

@@ -8,7 +8,6 @@ from App.controllers import ( create_user, get_all_users_json, get_all_users )
 from App.models.workout import Workout
 import csv
 
-import csv
 # This commands file allow you to create convenient CLI commands for testing controllers
 
 app = create_app()
