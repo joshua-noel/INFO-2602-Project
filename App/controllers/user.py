@@ -68,6 +68,11 @@ def add_workout_to_routine(self, routine_id, workout_id):
     db.session.commit()
     return routine_workout
 
+def remove_workout_from_routine(self, routine_id, workout_id):
+    routine_workout = RoutineWorkout.query.filter_by(user_id=self.id, routine_id=routine_id, workout_id=workout_id).delete()
+    db.session.commit()
+    return None
+
 
 
     
