@@ -6,7 +6,7 @@ class RoutineWorkout(db.Model): # Stores the workouts that have been added to a 
     workout_id = db.Column(db.Integer, db.ForeignKey('workout.id'))
     routine_id = db.Column(db.Integer, db.ForeignKey('routine.id'))
 
-    def __init__(self, workout_id, routine_id, name, duration):
+    def __init__(self, user_id, workout_id, routine_id):
         self.user_id = user_id
         self.workout_id = workout_id
         self.routine_id = routine_id
