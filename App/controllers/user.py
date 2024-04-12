@@ -63,8 +63,8 @@ def check_workout (self, routine_id, workout_id):
     else:
         return valid
 
-def add_workout_to_routine(routine_id, workout_id):
-    routine_workout = RoutineWorkout(workout_id = workout_id, routine_id = routine_id)
+def add_workout_to_routine(self, routine_id, workout_id):
+    routine_workout = RoutineWorkout(self.id, workout_id = workout_id, routine_id = routine_id)
     db.session.add(routine_workout)
     db.session.commit()
     return routine_workout
