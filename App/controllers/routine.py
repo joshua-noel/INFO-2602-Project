@@ -18,15 +18,27 @@ def get_all_routines_json():
 
     return [routine.get_json() for routine in routines]
 
-def update_routine(id, duration):
+def update_routine(id, name, duration):
     routine = get_routine_by_id(id=id)
 
     if routine:
         routine.duration = duration
+        routine.name = name
         db.session.add(routine)
         return db.session.commit()
 
     return None
+
+def rename_routine(id, name):
+    routine = get_routine_by_id(id=id)
+
+    if routine:
+        routine.name = name
+        db.session.add(routine)
+        return db.session.commit()
+
+    return None
+
 
 def add_workout(self, workout_id, name, duration):
     try:
