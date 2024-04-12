@@ -21,25 +21,8 @@ from App.controllers import (
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
-# @index_views.route('/', methods=['GET'])
-# def index_page():
-#     return render_template('index.html')
-
-# @index_views.route('/init', methods=['GET'])
-# def init():
-#     db.drop_all()
-#     db.create_all()
-#     create_user('bob', 'bobpass')
-#     return jsonify(message='db initialized!')
-
-# @index_views.route('/health', methods=['GET'])
-# def health_check():
-#     return jsonify({'status':'healthy'})
-
-# Page Routes
-
 @index_views.route("/", methods=['GET'])
-@index_views.route("/<id>", methods=['GET']) #"/<int:routine_id>"
+@index_views.route("/<id>", methods=['GET'])
 @jwt_required()
 def index_page(id=1):
     default_routine = get_routine_by_id(id=1)
@@ -87,29 +70,29 @@ def health_check():
 @jwt_required()
 def create_routine_action():
     data = request.form
-    valid = check_routine(jwt_current_user, name=data['routine_name'])
+    exists = check_routine(jwt_current_user, name=data['routine_name'])
 
-    if valid == True:
-        create_routine(jwt_current_user, name=data['routine_name'])
+    if not exists:
+        routine = create_routine(jwt_current_user, name=data['routine_name'])
         flash('Routine created!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=routine.id))
     else:
         flash('A Routine of this name already exists!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=exists.id))
 
 @index_views.route("/renameRoutine/<id>", methods=['POST'])
 @jwt_required()
 def rename_routine_action(id=id):
     data = request.form
-    valid = check_routine(jwt_current_user, name=data['routine_rename'])
+    exists = check_routine(jwt_current_user, name=data['routine_rename'])
 
-    if valid == True:
+    if not exists:
         rename_routine(id=id, name=data['routine_rename'])
         flash('Routine renamed!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=id))
     else:
         flash('A Routine of this name already exists!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=id))
 
 @index_views.route("/addWorkout/<selected_routine_id>/<workout_id>", methods=['GET'])
 @jwt_required()
@@ -119,10 +102,10 @@ def add_workout_to_routine_action(selected_routine_id, workout_id):
     if workout_in_routine:
         add_workout_to_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
         flash('Workout added!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=selected_routine_id))
     else: 
         flash('Workout already exists in this routine!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=selected_routine_id))
 
 @index_views.route("/deleteWorkout/<selected_routine_id>/<workout_id>", methods=['GET'])
 @jwt_required()
@@ -132,8 +115,8 @@ def delete_workout_from_routine_action(selected_routine_id, workout_id):
     if not workout_in_routine:
         remove_workout_from_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
         flash('Workout removed!')
-        return redirect(url_for(f'index_views.index_page'))
+        return redirect(url_for(f'index_views.index_page', id=selected_routine_id))
     else: 
         flash('Workout does not exist in this routine!')
-        return redirect(url_for('index_views.index_page'))
+        return redirect(url_for('index_views.index_page', id=selected_routine_id))
 

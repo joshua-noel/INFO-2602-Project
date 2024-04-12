@@ -41,13 +41,12 @@ def create_default_routine(self):
     return routine
 
 def check_routine(self, name):
-    valid = True
-    check = Routine.query.filter_by(name = name, user_id = self.id).first()
-    if check:
-        valid = False
-        return valid
-    else:
-        return valid
+    found = Routine.query.filter_by(name = name, user_id = self.id).first()
+
+    if found:
+        return found
+    
+    return None
 
 def create_routine(self, name):
     routine = Routine(user_id = self.id, name = name, duration = None)
