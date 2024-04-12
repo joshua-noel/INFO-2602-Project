@@ -56,12 +56,11 @@ def create_routine(self, name):
     return routine
     
 def check_workout (self, routine_id, workout_id):
-    check = RoutineWorkout.query.filter_by(user_id = self.id, workout_id = workout_id, routine_id = routine_id)
+    check = RoutineWorkout.query.filter_by(user_id = self.id, workout_id = workout_id, routine_id = routine_id).first()
     if check:
-        valid = False
-        return valid
+        return False
     else:
-        return valid
+        return True
 
 def add_workout_to_routine(self, routine_id, workout_id):
     routine_workout = RoutineWorkout(self.id, workout_id = workout_id, routine_id = routine_id)

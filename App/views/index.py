@@ -104,7 +104,7 @@ def rename_routine_action(id=id):
 def add_workout_to_routine_action(selected_routine_id, workout_id):#(selected_routine_id= selected_routine_id, workout_id= workout_id):
     valid = check_workout(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
 
-    if valid == False:
+    if valid == True:
         add_workout_to_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
         flash('Workout added!')
         return redirect(url_for(f'index_views.index_page'))
