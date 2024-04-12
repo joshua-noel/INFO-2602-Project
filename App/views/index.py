@@ -11,7 +11,9 @@ from App.controllers import (
     get_all_workouts,
     get_all_routines,
     get_routine_by_id,
-    rename_routine
+    rename_routine,
+    check_workout,
+    add_workout_to_routine
 )
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -91,3 +93,17 @@ def rename_routine_action(id=id):
     else:
         flash('A Routine of this name already exists!')
         return redirect(url_for('index_views.index_page'))
+
+# unsolved error selected_routine_id not defined
+
+# @index_views.route("/addWorkout/<selected_routine_id>/<workout_id>", methods=['GET'])
+# @jwt_required()
+# def add_workout_to_routine_action(selected_routine_id= selected_routine_id, workout_id= workout_id):
+#     valid = check_workout(jwt_current_user, selected_routine_id, workout_id)
+#     if valid == True:
+#         add_workout_to_routine(routine_id = selected_routine_id, workout_id = workout_id)
+#         flash('Workout added!')
+#         return redirect(url_for('index_views.index_page'))
+#     else: 
+#         flash('Workout already exists in this routine!')
+#         return redirect(url_for('index_views.index_page'))

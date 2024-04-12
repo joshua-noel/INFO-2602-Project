@@ -85,11 +85,12 @@
               <p>Duration: {{workout.duration}}</p>
             </div>
             <div class="card-action">
-              <a href="/addWorkout/{{workout.id}}" class="btn">Add</a>
+                <a href="/addWorkout/{{selected_routine.id}}/{{workout.id}}" class="btn">Add</a>
             </div>
           </div>
         </div>
       {% endfor %}
+      </div>
     </section>
       {% else %}
         <h1>Flask MVC</h1>

@@ -28,7 +28,7 @@ def update_routine(id, name, duration):
         return db.session.commit()
 
     return None
-
+    
 def rename_routine(id, name):
     routine = get_routine_by_id(id=id)
 
@@ -38,7 +38,6 @@ def rename_routine(id, name):
         return db.session.commit()
 
     return None
-
 
 def add_workout(self, workout_id, name, duration):
     try:
