@@ -14,7 +14,8 @@ from App.controllers import (
     rename_routine,
     check_workout,
     add_workout_to_routine,
-    get_all_routineworkouts
+    get_all_routineworkouts,
+    remove_workout_from_routine
 )
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -97,17 +98,29 @@ def rename_routine_action(id=id):
         flash('A Routine of this name already exists!')
         return redirect(url_for('index_views.index_page'))
 
-# unsolved error: TypeError: add_workout_to_routine_action() got an unexpected keyword argument 'selected_routine_id'
-
 @index_views.route("/addWorkout/<selected_routine_id>/<workout_id>", methods=['GET'])
 @jwt_required()
-def add_workout_to_routine_action(selected_routine_id, workout_id):#(selected_routine_id= selected_routine_id, workout_id= workout_id):
-    valid = check_workout(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
+def add_workout_to_routine_action(selected_routine_id, workout_id):
+    workout_in_routine = check_workout(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
 
-    if valid == True:
+    if workout_in_routine:
         add_workout_to_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
         flash('Workout added!')
         return redirect(url_for(f'index_views.index_page'))
     else: 
         flash('Workout already exists in this routine!')
         return redirect(url_for('index_views.index_page'))
+
+@index_views.route("/deleteWorkout/<selected_routine_id>/<workout_id>", methods=['GET'])
+@jwt_required()
+def delete_workout_from_routine_action(selected_routine_id, workout_id):
+    workout_in_routine = check_workout(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
+
+    if not workout_in_routine:
+        remove_workout_from_routine(jwt_current_user, routine_id=selected_routine_id, workout_id=workout_id)
+        flash('Workout removed!')
+        return redirect(url_for(f'index_views.index_page'))
+    else: 
+        flash('Workout does not exist in this routine!')
+        return redirect(url_for('index_views.index_page'))
+

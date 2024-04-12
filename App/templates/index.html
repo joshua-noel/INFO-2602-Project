@@ -64,7 +64,7 @@
                     {% if workout.id == routineworkout.workout_id %}
                       <div class="list-item" style="height: 40px;">
                       {{workout.name}}
-                      <a class="btn red right" type="submit" value="Delete" id="delete_{{workout.name}}" href="">Delete</a> <!--/deleteWorkout/{{workout.id}}-->
+                      <a class="btn red right" type="submit" value="Delete" id="delete_{{workout.name}}" href="/deleteWorkout/{{selected_routine.id}}/{{workout.id}}">Delete</a>
                       </div>
                     {% endif %}
                   {% endfor %}
