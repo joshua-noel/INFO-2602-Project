@@ -53,3 +53,5 @@ def add_workout(self, workout_id, name, duration):
 
     return None
 
+#add controller to get all routineworkouts from a routine then iterate across in index
+

@@ -16,7 +16,8 @@ from App.controllers import (
     check_workout,
     add_workout_to_routine,
     get_all_routineworkouts,
-    remove_workout_from_routine
+    remove_workout_from_routine,
+    get_all_workouts_in_routine
 )
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
@@ -26,20 +27,31 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 @jwt_required()
 def index_page(id=1):
     default_routine = get_routine_by_id(id=1)
+    totalDuration = 0
 
     if default_routine:
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
         routineworkouts = get_all_routineworkouts()
         selected_routine = get_routine_by_id(id=id)
-        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routineworkouts = routineworkouts, selected_routine = selected_routine, current_user = jwt_current_user)
+        user_routine_workouts = get_all_workouts_in_routine(routine_id=id)
+
+        for workout in user_routine_workouts:
+            totalDuration += workout.workout.duration
+
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routineworkouts = routineworkouts, selected_routine = selected_routine, totalDuration=(totalDuration/60), current_user = jwt_current_user)
     else:
         default_routine = create_default_routine(jwt_current_user)
         allroutines = get_all_routines()
         allworkouts = get_all_workouts()
         routineworkouts = get_all_routineworkouts()
         selected_routine = get_routine_by_id(id=default_routine.id)
-        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routineworkouts = routineworkouts, selected_routine = selected_routine, current_user = jwt_current_user)
+        user_routine_workouts = get_all_workouts_in_routine(routine_id=default_routine.id)
+
+        for workout in user_routine_workouts:
+            totalDuration += workout.workout.duration
+
+        return render_template("index.html", allroutines = allroutines, allworkouts = allworkouts, routineworkouts = routineworkouts, selected_routine = selected_routine, totalDuration=(totalDuration/60), current_user = jwt_current_user)
 
 @index_views.route('/init', methods=['GET'])
 def init():
