@@ -11,3 +11,6 @@ def get_all_routines_json():
         return []
 
     return [routine_workout.get_json() for routine_workout in routine_workouts]
+
+def get_all_workouts_in_routine(routine_id):
+    return RoutineWorkout.query.filter_by(routine_id=routine_id)
