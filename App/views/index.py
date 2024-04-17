@@ -131,8 +131,3 @@ def delete_workout_from_routine_action(selected_routine_id, workout_id):
     else: 
         flash('Workout does not exist in this routine!')
         return redirect(url_for('index_views.index_page', id=selected_routine_id))
-
-@app.errorhandler(Exception)
-def generic_error(error):
-    create_user('bob', 'bobpass')
-    return redirect(url_for('index_views.index_page'))
